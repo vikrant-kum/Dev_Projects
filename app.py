@@ -16,8 +16,23 @@ def get_db_connection():
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
 
+    query = """
+        SELECT id, name, department, salary
+        FROM employees
+        ORDER BY id DESC
+        LIMIT 2
+    """
+
+    cursor.execute(query)
+    employees = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    return render_template("index.html", employees=employees)
 
 @app.route("/add_employee", methods=["POST"])
 def add_employee():
