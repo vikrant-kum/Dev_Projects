@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+logs/
+backup/
+exports/
+app_bck.py
+app_d-ff.py
+monitor_app.sh
